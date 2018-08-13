@@ -106,6 +106,13 @@ def main():
         # accident.
         compile_args.append('-Werror=sign-compare')
 
+        # Disable error on casting the number and type of arguments to functions
+        # Cython generates code with implicit function casting.
+        compile_args.append('-Wno-cast-function-type')
+
+        # Cython will perform conversions of char to unsigned int.
+        compile_args.append('-Wno-sign-conversion')
+
     # http://bugs.python.org/issue7576
     if sys.version_info[0] == 3 and sys.version_info[1] < 2:
         compile_args.append('-Wno-error=missing-field-initializers')
